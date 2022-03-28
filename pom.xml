@@ -6,7 +6,11 @@
 
     <groupId>com.frog</groupId>
     <artifactId>permission-cloud</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>permission-common</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
