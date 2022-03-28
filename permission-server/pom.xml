@@ -9,17 +9,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>permission-common</artifactId>
+    <artifactId>permission-server</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>permission-common-core</module>
-        <module>permission-common-starter-redis</module>
-        <module>permission-common-swagger</module>
-    </modules>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
+
+    <dependencies>
+
+
+    </dependencies>
 
 </project>
