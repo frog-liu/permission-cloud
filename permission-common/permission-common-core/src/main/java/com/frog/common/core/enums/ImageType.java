@@ -12,5 +12,7 @@ public enum ImageType {
 
     JPG,
 
+    GIF,
+
     ;
 }

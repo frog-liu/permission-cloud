@@ -11,6 +11,7 @@
     <modules>
         <module>permission-common</module>
         <module>permission-server</module>
+        <module>permission-security</module>
     </modules>
 
     <properties>
@@ -29,8 +30,10 @@
         <swagger.fox.version>3.0.0</swagger.fox.version>
         <swagger.core.version>1.6.2</swagger.core.version>
         <pagehelper.boot.version>1.4.1</pagehelper.boot.version>
+        <hutool.all.version>5.7.20</hutool.all.version>
 
         <permission.common.core.version>1.0-SNAPSHOT</permission.common.core.version>
+        <permission.common.redis.version>1.0-SNAPSHOT</permission.common.redis.version>
         <permission.common.datasource.version>1.0-SNAPSHOT</permission.common.datasource.version>
         <permission.common.swagger.version>1.0-SNAPSHOT</permission.common.swagger.version>
         <permission.security.version>1.0-SNAPSHOT</permission.security.version>
