@@ -16,7 +16,6 @@
             <artifactId>permission-security</artifactId>
             <version>${permission.security.version}</version>
         </dependency>
-
     </dependencies>
 
 </project>
