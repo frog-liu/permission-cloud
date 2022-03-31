@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.frog.system.mapper.UserMapper">
+
+    <select id="listUser" parameterType="com.frog.system.domain.system.User" resultType="com.frog.system.domain.User">
+        select
+           u.id,
+           u.username,
+           u.name,
+           u.phone,
+           u.email,
+           u.department_id as deparmentId,
+           d.name as departmentName,
+           u.sex,
+           u.avatar,
+           u.user_code as userCode,
+           u.status
+        from t_user u left join t_department d on u.department_id = d.id
+        where 1=1
+        <if test="user.username != null and user.username != ''">
+            and u.username like concat('%', #{user.username}, "%")
+        </if>
+        <if test="user.name != null and user.name != ''">
+            and u.name like concat('%', #{user.name}, "%")
+        </if>
+        <if test="user.phone != null and user.phone != ''">
+            and u.phone = #{user.phone}
+        </if>
+        <if test="user.email != null and user.email != ''">
+            and u.email = #{user.email}
+        </if>
+        <if test="user.departmentId != null">
+            and u.departmentId = #{user.departmentId}
+        </if>
+        <if test="user.userCode != null and user.userCode != ''">
+            and u.userCode = #{user.userCode}
+        </if>
+        <if test="user.status != null">
+            and u.status = #{user.status}
+        </if>
+    </select>
+
+</mapper> 

@@ -1,4 +1,4 @@
-package com.frog.common.core.enums;
+package com.frog.system.enums;
 
 import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.Getter;
@@ -7,29 +7,29 @@ import lombok.Getter;
  * @author lh
  */
 @Getter
-public enum StatusEnum {
+public enum MenuType {
 
     /**
-     * 无效
+     * 目录
      */
-    INVALID(0),
+    CONTENT(0),
 
     /**
-     * 有效
+     * 菜单
      */
-    VALID(1),
+    MENU(1),
 
     /**
-     * 锁定
+     * 按钮
      */
-    LOCKED(2),
+    BUTTON(2),
 
     ;
 
     @EnumValue
     private Integer code;
 
-    StatusEnum(Integer code) {
+    MenuType(Integer code) {
         this.code = code;
     }
 }
