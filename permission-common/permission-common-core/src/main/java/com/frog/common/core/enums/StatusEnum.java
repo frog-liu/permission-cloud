@@ -32,4 +32,8 @@ public enum StatusEnum {
     StatusEnum(Integer code) {
         this.code = code;
     }
+
+    public boolean isMatch(Integer code) {
+        return this.code.equals(code);
+    }
 }

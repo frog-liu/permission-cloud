@@ -25,6 +25,8 @@ public interface ApiConstants {
 
     String LIST = "/list";
 
+    String TREE = "/tree";
+
     /**
      * 用户信息
      */
@@ -44,5 +46,15 @@ public interface ApiConstants {
      * 菜单信息
      */
     String MENU = "/menus";
+
+    /**
+     * 登录信息
+     */
+    String LOGIN_INFO = "/loginInfo";
+
+    /**
+     * 操作日志
+     */
+    String OPERATION_LOG = "/operationLog";
 
 }

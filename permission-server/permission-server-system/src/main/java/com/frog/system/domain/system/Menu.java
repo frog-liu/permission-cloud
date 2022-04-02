@@ -3,12 +3,16 @@ package com.frog.system.domain.system;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.frog.common.core.enums.StatusEnum;
+import com.frog.common.core.domain.TreeNode;
 import com.frog.system.domain.BaseEntity;
-import com.frog.system.enums.MenuType;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * @author lh
@@ -16,62 +20,67 @@ import lombok.ToString;
 @Data
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class Menu extends BaseEntity {
+@ApiModel("菜单信息")
+public class Menu extends BaseEntity implements TreeNode {
 
     private static final long serialVersionUID = 7002190080872161190L;
 
-    /**
-     * 菜单id
-     */
     @TableId(value = "id", type = IdType.AUTO)
+    @ApiModelProperty(value = "菜单id")
     private Long id;
 
-    /**
-     * 父菜单id
-     */
     @TableField("parent_id")
+    @ApiModelProperty("父菜单id")
     private Long parentId;
 
-    /**
-     * 菜单名称
-     */
     @TableField("name")
+    @ApiModelProperty("菜单名称")
     private String name;
 
-    /**
-     * 显示顺序
-     */
     @TableField("order")
+    @ApiModelProperty("显示顺序")
     private Integer order;
 
     /**
-     * 菜单类型
+     * @see com.frog.system.enums.MenuType
      */
     @TableField("type")
-    private MenuType type;
+    @ApiModelProperty("菜单类型")
+    private Integer type;
 
-    /**
-     * 路由路径
-     */
     @TableField("path")
+    @ApiModelProperty("路由路径")
     private String path;
 
-    /**
-     * 权限
-     */
     @TableField("permission")
+    @ApiModelProperty("权限")
     private String permission;
 
-    /**
-     * 图标
-     */
     @TableField("icon")
+    @ApiModelProperty("图标")
     private String icon;
 
     /**
-     * 状态
+     * @see com.frog.common.core.enums.StatusEnum
      */
     @TableField("status")
-    private StatusEnum status;
+    @ApiModelProperty("状态")
+    private Integer status;
 
+    @TableField(exist = false)
+    @ApiModelProperty("子菜单列表")
+    private List<Menu> childrenList;
+
+    @Override
+    public boolean isSuperParent() {
+        return this.parentId == null || this.parentId.equals(-1L);
+    }
+
+    @Override
+    public <T extends TreeNode> void addChildren(T treeNode) {
+        if (this.childrenList == null) {
+            this.childrenList = new LinkedList<>();
+        }
+        childrenList.add((Menu) treeNode);
+    }
 }
