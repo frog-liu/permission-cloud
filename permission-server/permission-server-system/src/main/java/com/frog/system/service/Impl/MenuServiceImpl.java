@@ -86,17 +86,15 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
         if (childrenList == null) {
             childrenList = new LinkedList<>();
         }
-        List<Menu> firstChildrenList = listFirstChildren(parentIdList);
-        if (!CollectionUtils.isEmpty(firstChildrenList)) {
-            childrenList.addAll(firstChildrenList);
-            parentIdList = firstChildrenList.stream().map(Menu::getId).collect(Collectors.toList());
-            listAllChildren(parentIdList, childrenList);
+        if (!CollectionUtils.isEmpty(parentIdList)) {
+            List<Menu> firstChildrenList = lambdaQuery().in(Menu::getParentId, parentIdList).list();
+            if (!CollectionUtils.isEmpty(firstChildrenList)) {
+                childrenList.addAll(firstChildrenList);
+                parentIdList = firstChildrenList.stream().map(Menu::getId).collect(Collectors.toList());
+                listAllChildren(parentIdList, childrenList);
+            }
         }
         return childrenList;
     }
 
-    private List<Menu> listFirstChildren(List<Long> parentIdList) {
-        Assert.notEmpty(parentIdList, "操作失败: 父菜单id不能为空!");
-        return lambdaQuery().in(Menu::getParentId, parentIdList).list();
-    }
 }

@@ -66,6 +66,4 @@ public class MenuController extends BaseController {
         return Result.ok();
     }
 
-
-
 }
