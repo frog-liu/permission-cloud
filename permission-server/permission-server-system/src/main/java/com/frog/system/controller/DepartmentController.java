@@ -4,7 +4,6 @@ import com.frog.common.core.domain.Result;
 import com.frog.common.core.util.TreeUtils;
 import com.frog.system.constant.ApiConstants;
 import com.frog.system.domain.system.Department;
-import com.frog.system.domain.system.Menu;
 import com.frog.system.service.IDepartmentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -47,6 +46,22 @@ public class DepartmentController extends BaseController {
     @PutMapping(value = "")
     public Result updateDepartment(Department department) {
         departmentService.update(department);
+        return Result.ok();
+    }
+
+    @ApiOperation(value = "删除部门", httpMethod = "DELETE")
+    @PreAuthorize("hasAuthority('system:menu:delete')")
+    @DeleteMapping(value = "")
+    public Result deleteById(Long id) {
+        departmentService.deleteById(id);
+        return Result.ok();
+    }
+
+    @ApiOperation(value = "批量删除菜单", httpMethod = "DELETE")
+    @PreAuthorize("hasAuthority('system:menu:delete')")
+    @DeleteMapping(value = ApiConstants.LIST)
+    public Result batchDeleteById(List<Long> idList) {
+        departmentService.batchDeleteById(idList);
         return Result.ok();
     }
 

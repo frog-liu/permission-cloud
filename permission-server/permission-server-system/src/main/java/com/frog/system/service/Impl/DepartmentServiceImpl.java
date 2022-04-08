@@ -1,6 +1,7 @@
 package com.frog.system.service.Impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.frog.common.core.enums.StatusEnum;
 import com.frog.common.core.util.Assert;
 import com.frog.system.domain.system.Department;
 import com.frog.system.domain.system.Menu;
@@ -11,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,7 +41,35 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
     public void update(Department department) {
         Assert.notNull(department.getId(), "更新部门失败: 部门id不能为空!");
         check(department);
+        List<Department> allChildList = listAllChild(Collections.singletonList(department.getId()), new LinkedList<>());
+        allChildList.forEach(child -> {
+            Assert.isTrue(!child.getId().equals(department.getParentId()), "更新部门失败: 上级部门不能指向下级部门!");
+        });
+        this.baseMapper.updateById(department);
+    }
 
+    @Override
+    public void deleteById(Long id) {
+        Assert.notNull(id, "删除部门失败: 部门id不能为空!");
+        List<Department> allChildList = listAllChild(Collections.singletonList(id), new LinkedList<>());
+        allChildList.forEach(child -> {
+            Assert.isTrue(StatusEnum.INVALID.isMatch(child.getStatus()), "删除部门失败: 请先删除该部门下的子部门!");
+        });
+        lambdaUpdate().set(Department::getStatus, StatusEnum.INVALID.getCode())
+                .eq(Department::getId, id)
+                .update();
+    }
+
+    @Override
+    public void batchDeleteById(List<Long> idList) {
+        Assert.notEmpty(idList, "批量删除部门失败: 部门id列表不能为空!");
+        List<Department> allChildList = listAllChild(idList, new LinkedList<>());
+        allChildList.forEach(child -> {
+            Assert.isTrue(StatusEnum.INVALID.isMatch(child.getStatus()) || idList.contains(child.getId()), "删除部门失败: 请先删除该部门下的子部门!");
+        });
+        lambdaUpdate().set(Department::getStatus, StatusEnum.INVALID.getCode())
+                .in(Department::getId, idList)
+                .update();
     }
 
     private void check(Department department) {

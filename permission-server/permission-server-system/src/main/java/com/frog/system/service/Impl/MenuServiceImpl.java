@@ -42,8 +42,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     public void update(Menu menu) {
         check(menu);
         Assert.notNull(menu.getId(), "更新菜单失败: 菜单id不能为空");
-        List<Menu> allChildMenuList = listAllChildren(Collections.singletonList(menu.getId()), new LinkedList<>());
-        allChildMenuList.forEach(child -> {
+        List<Menu> allChildList = listAllChild(Collections.singletonList(menu.getId()), new LinkedList<>());
+        allChildList.forEach(child -> {
             Assert.isTrue(!child.getId().equals(menu.getParentId()), "更新菜单失败: 父类菜单不能指向子级菜单!");
         });
         this.baseMapper.updateById(menu);
@@ -61,8 +61,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Override
     public void deleteById(Long id) {
         Assert.notNull(id, "删除菜单失败: 菜单id不能为空!");
-        List<Menu> allChildMenuList = listAllChildren(Collections.singletonList(id), new LinkedList<>());
-        allChildMenuList.forEach(child -> {
+        List<Menu> allChildList = listAllChild(Collections.singletonList(id), new LinkedList<>());
+        allChildList.forEach(child -> {
             Assert.isTrue(StatusEnum.INVALID.isMatch(child.getStatus()), "删除菜单失败: 请先将所有子菜单置为无效!");
         });
         lambdaUpdate().set(Menu::getStatus, StatusEnum.INVALID.getCode())
@@ -73,8 +73,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
     @Override
     public void batchDeleteById(List<Long> idList) {
         Assert.notEmpty(idList, "批量删除菜单失败: 菜单id列表不能为空!");
-        List<Menu> allChildMenuList = listAllChildren(idList, new LinkedList<>());
-        allChildMenuList.forEach(child -> {
+        List<Menu> allChildList = listAllChild(idList, new LinkedList<>());
+        allChildList.forEach(child -> {
             Assert.isTrue(StatusEnum.INVALID.isMatch(child.getStatus()) || idList.contains(child.getId()), "删除菜单失败: 请先将所有子菜单置为无效!");
         });
         lambdaUpdate().set(Menu::getStatus, StatusEnum.INVALID.getCode())
@@ -82,7 +82,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
                 .update();
     }
 
-    private List<Menu> listAllChildren(List<Long> parentIdList, List<Menu> childrenList) {
+    private List<Menu> listAllChild(List<Long> parentIdList, List<Menu> childrenList) {
         if (childrenList == null) {
             childrenList = new LinkedList<>();
         }
@@ -91,7 +91,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements IM
             if (!CollectionUtils.isEmpty(firstChildrenList)) {
                 childrenList.addAll(firstChildrenList);
                 parentIdList = firstChildrenList.stream().map(Menu::getId).collect(Collectors.toList());
-                listAllChildren(parentIdList, childrenList);
+                listAllChild(parentIdList, childrenList);
             }
         }
         return childrenList;

@@ -28,4 +28,16 @@ public interface IDepartmentService extends IService<Department> {
      * @param department 部门信息
      */
     void update(Department department);
+
+    /**
+     * 删除部门
+     * @param id 部门id
+     */
+    void deleteById(Long id);
+
+    /**
+     * 批量删除部门
+     * @param idList 部门id列表
+     */
+    void batchDeleteById(List<Long> idList);
 }

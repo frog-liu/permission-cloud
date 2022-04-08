@@ -50,7 +50,7 @@ public class MenuController extends BaseController {
         return Result.ok();
     }
 
-    @ApiOperation(value = "批量删除菜单", httpMethod = "DELETE")
+    @ApiOperation(value = "删除菜单", httpMethod = "DELETE")
     @PreAuthorize("hasAuthority('system:menu:delete')")
     @DeleteMapping(value = "")
     public Result deleteById(Long id) {
