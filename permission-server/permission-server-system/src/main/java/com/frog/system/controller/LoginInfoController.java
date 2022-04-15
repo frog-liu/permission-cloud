@@ -2,7 +2,7 @@ package com.frog.system.controller;
 
 import com.frog.common.core.domain.PageData;
 import com.frog.common.core.domain.Result;
-import com.frog.system.constant.ApiConstants;
+import com.frog.common.core.constant.ApiConstants;
 import com.frog.system.domain.system.LoginInfo;
 import com.frog.system.service.ILoginInfoService;
 import io.swagger.annotations.Api;

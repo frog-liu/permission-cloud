@@ -19,9 +19,14 @@ import java.util.List;
 public class OperationLogServiceImpl extends ServiceImpl<OperationLogMapper, OperationLog> implements IOperationLogService {
 
     @Override
+    public void add(OperationLog operationLog) {
+        this.baseMapper.insert(operationLog);
+    }
+
+    @Override
     public List<OperationLog> listOperationLog(OperationLog operationLog) {
         return lambdaQuery().eq(OperationLog::getStatus, StatusEnum.VALID.getCode())
-                .eq(StringUtils.isNotEmpty(operationLog.getTitle()), OperationLog::getTitle, operationLog.getTitle())
+                .eq(StringUtils.isNotEmpty(operationLog.getDescription()), OperationLog::getDescription, operationLog.getDescription())
                 .eq(ObjectUtils.allNotNull(operationLog.getCreateBy()), OperationLog::getCreateBy, operationLog.getCreateBy())
                 .eq(StringUtils.isNotEmpty(operationLog.getIp()), OperationLog::getIp, operationLog.getIp())
                 .le(ObjectUtils.allNotNull(operationLog.getStartTime()), OperationLog::getCreateTime, operationLog.getStartTime())

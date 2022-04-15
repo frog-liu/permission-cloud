@@ -12,6 +12,12 @@ import java.util.List;
 public interface IOperationLogService extends IService<OperationLog> {
 
     /**
+     * 添加用户操作日志
+     * @param operationLog 用户操作日志
+     */
+    void add(OperationLog operationLog);
+
+    /**
      * 查询操作日志列表
      * @param operationLog 操作日志
      * @return 操作日志列表

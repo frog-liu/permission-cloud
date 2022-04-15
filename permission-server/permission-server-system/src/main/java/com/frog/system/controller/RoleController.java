@@ -1,7 +1,7 @@
 package com.frog.system.controller;
 
 import com.frog.common.core.domain.Result;
-import com.frog.system.constant.ApiConstants;
+import com.frog.common.core.constant.ApiConstants;
 import com.frog.system.domain.system.Role;
 import com.frog.system.service.IRoleService;
 import io.swagger.annotations.Api;

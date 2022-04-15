@@ -16,6 +16,12 @@
             <artifactId>permission-security</artifactId>
             <version>${permission.security.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

@@ -2,7 +2,7 @@ package com.frog.system.controller;
 
 import com.frog.common.core.domain.Result;
 import com.frog.common.core.util.TreeUtils;
-import com.frog.system.constant.ApiConstants;
+import com.frog.common.core.constant.ApiConstants;
 import com.frog.system.domain.system.Menu;
 import com.frog.system.service.IMenuService;
 import io.swagger.annotations.Api;

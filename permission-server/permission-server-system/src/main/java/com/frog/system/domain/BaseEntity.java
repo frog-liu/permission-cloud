@@ -1,12 +1,13 @@
 package com.frog.system.domain;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @author lh
@@ -21,14 +22,14 @@ public class BaseEntity implements Serializable {
     /**
      * 创建人
      */
-    @TableField("create_by")
+    @TableField(value = "create_by", fill = FieldFill.INSERT)
     private Long createBy;
 
     /**
      * 创建时间
      */
     @TableField("create_time")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
      * 最后更新人
@@ -40,5 +41,12 @@ public class BaseEntity implements Serializable {
      * 最后更新时间
      */
     @TableField("last_update_time")
-    private Date lastUpdateTime;
+    private LocalDateTime lastUpdateTime;
+
+    @TableField(exist = false)
+    private LocalDateTime startTime;
+
+    @TableField(exist = false)
+    private LocalDateTime endTime;
+
 }

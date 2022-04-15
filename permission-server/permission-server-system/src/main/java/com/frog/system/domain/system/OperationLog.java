@@ -7,12 +7,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.frog.system.domain.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiOperation;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-
-import java.util.Date;
 
 /**
  * @author lh
@@ -20,8 +18,9 @@ import java.util.Date;
 @Data
 @ToString
 @EqualsAndHashCode(callSuper = false)
-@TableName("operation_log")
+@TableName("t_operation_log")
 @ApiModel("操作日志信息")
+@Builder
 public class OperationLog extends BaseEntity {
 
     private static final long serialVersionUID = 3241865226956150894L;
@@ -30,9 +29,9 @@ public class OperationLog extends BaseEntity {
     @ApiModelProperty("id")
     private Long id;
 
-    @TableField("title")
-    @ApiModelProperty("操作名称")
-    private String title;
+    @TableField("description")
+    @ApiModelProperty("操作描述")
+    private String description;
 
     @TableField("request_id")
     @ApiModelProperty("请求id")
@@ -48,11 +47,5 @@ public class OperationLog extends BaseEntity {
     @TableField("status")
     @ApiModelProperty("状态")
     private Integer status;
-
-    @TableField(exist = false)
-    private Date startTime;
-
-    @TableField(exist = false)
-    private Date endTime;
 
 }

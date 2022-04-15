@@ -2,7 +2,8 @@ package com.frog.system.controller;
 
 import com.frog.common.core.domain.PageData;
 import com.frog.common.core.domain.Result;
-import com.frog.system.constant.ApiConstants;
+import com.frog.common.core.constant.ApiConstants;
+import com.frog.system.annotation.LogRecord;
 import com.frog.system.domain.system.User;
 import com.frog.system.service.IUserService;
 import io.swagger.annotations.Api;
@@ -35,6 +36,7 @@ public class UserController extends BaseController {
 
     @PostMapping(value = "")
     @ApiOperation(value = "新增用户", httpMethod = "POST")
+    @LogRecord(description = "新增用户")
     public Result addUser(User user) {
         userService.add(user);
         return Result.ok();
@@ -42,12 +44,14 @@ public class UserController extends BaseController {
 
     @PutMapping(value = "")
     @ApiOperation(value = "更新用户", httpMethod = "PUT")
+    @LogRecord(description = "更新用户")
     public Result update(User user) {
         this.userService.update(user);
         return Result.ok();
     }
 
     @DeleteMapping(value = "")
+    @LogRecord(description = "更新用户")
     @ApiOperation(value = "批量删除用户", httpMethod = "DELETE")
     public Result delete(List<Long> userIdList) {
         this.userService.batchDeleteById(userIdList);

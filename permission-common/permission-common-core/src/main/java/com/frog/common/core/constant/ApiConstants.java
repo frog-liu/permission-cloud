@@ -1,4 +1,4 @@
-package com.frog.system.constant;
+package com.frog.common.core.constant;
 
 /**
  * @author lh
@@ -11,12 +11,11 @@ public interface ApiConstants {
      */
     String ALL = "/**";
 
-    /**
-     * 所有授权路径
-     */
-    String OAUTH_ALL = "/oauth/**";
+    String WEB_JARS = "/webjars/**";
 
-    String OAUTH_AUTHORIZE = "/oauth/authorize";
+    String SWAGGER_API = "/doc.html";
+
+    String SWAGGER_RESOURCES = "/swagger-resources/**";
 
     /**
      * 登录

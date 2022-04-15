@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: permission-system
+  profiles:
+    active: ${profileActive}
