@@ -49,6 +49,17 @@ public final class Assert {
     }
 
     /**
+     * 断言这个 object 为 null
+     * <p>不为 null 则抛异常</p>
+     *
+     * @param object  对象
+     * @param message 消息
+     */
+    public static void isNull(Object object, String message, Object... params) {
+        isTrue(object != null, message, params);
+    }
+
+    /**
      * 断言这个 value 不为 empty
      * <p>为 empty 则抛异常</p>
      *

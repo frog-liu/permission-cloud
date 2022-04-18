@@ -18,6 +18,13 @@ public interface IRoleService extends IService<Role> {
     List<Role> listRole(Role role);
 
     /**
+     *
+     * @param idList
+     * @return
+     */
+    List<Role> listRole(List<Long> idList);
+
+    /**
      * 添加角色
      * @param role 添加的角色信息
      */

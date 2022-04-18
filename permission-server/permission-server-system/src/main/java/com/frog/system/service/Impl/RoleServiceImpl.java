@@ -26,6 +26,12 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
     }
 
     @Override
+    public List<Role> listRole(List<Long> idList) {
+        Assert.notEmpty(idList, "查询角色失败: 角色id列表不能为空");
+        return lambdaQuery().in(Role::getId, idList).list();
+    }
+
+    @Override
     public void add(Role role) {
         check(role);
         role.setId(null);

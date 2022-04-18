@@ -3,6 +3,7 @@ package com.frog.system.domain.system;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.frog.system.domain.BaseEntity;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -12,6 +13,7 @@ import lombok.ToString;
  */
 @Data
 @ToString
+@Builder
 @EqualsAndHashCode(callSuper = false)
 @TableName("t_user_role")
 public class UserRole extends BaseEntity {

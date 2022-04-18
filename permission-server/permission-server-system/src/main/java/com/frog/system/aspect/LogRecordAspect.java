@@ -68,11 +68,8 @@ public class LogRecordAspect {
                 log.error("requestId → {}, params → {}, exception → {}", requestId, jsonArgs(joinPoint), exception.getMessage());
             }
             operationLogService.add(operationLog);
-        } catch (Exception exp) {
-            // 记录本地异常日志
-            log.error("==前置通知异常==");
-            log.error("异常信息:{}", exp.getMessage());
-            exp.printStackTrace();
+        } catch (Exception e) {
+            log.error("记录操作日志异常: {}", e.getMessage());
         }
     }
 

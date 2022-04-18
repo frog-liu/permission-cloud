@@ -13,6 +13,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.util.List;
+
 /**
  * @author lh
  */
@@ -73,5 +75,8 @@ public class User extends BaseEntity {
     @TableField("status")
     @ApiModelProperty("状态")
     private Integer status;
+
+    @ApiModelProperty("角色id列表")
+    private List<Long> roleIdList;
 
 }
