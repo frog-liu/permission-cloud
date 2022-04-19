@@ -32,6 +32,10 @@ public class Role extends BaseEntity {
     @TableField("name")
     private String name;
 
+    @ApiModelProperty(value = "角色code")
+    @TableField("code")
+    private String code;
+
     @ApiModelProperty(value = "角色描述")
     @TableField("description")
     private String description;
